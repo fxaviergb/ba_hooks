@@ -1,0 +1,15 @@
+#!/bin/bash
+
+INPUT_FILE=$1
+START_LINE=`head -n1 $INPUT_FILE`
+PATTERN="^(REQ) #[[:digit:]]+: "
+
+if ! [[ "$START_LINE" =~ $PATTERN ]]; then
+  echo -e "\e[1;31m############################\e[0m"
+  echo -e "\e[1;31mERROR EN MENSAJE DE COMMIT\e[0m"
+  echo -e "\e[1;31m############################\e[0m"
+  echo ">> El mensaje del commit no cumple con el estándar del Banco del Austro."
+  echo ">> Revise los ejemplos: "
+  echo "   REQ #123: mensaje del commit"
+  exit 1
+fi

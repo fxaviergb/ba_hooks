@@ -1,15 +1,26 @@
-#!/bin/bash
+#!/bin/bsh
 
-INPUT_FILE=$1
-START_LINE=`head -n1 $INPUT_FILE`
-PATTERN="^(REQ) #[[:digit:]]+: "
 
-if ! [[ "$START_LINE" =~ $PATTERN ]]; then
-  echo -e "\e[1;31m############################\e[0m"
-  echo -e "\e[1;31mERROR EN MENSAJE DE COMMIT\e[0m"
-  echo -e "\e[1;31m############################\e[0m"
-  echo ">> El mensaje del commit no cumple con el estándar del Banco del Austro."
-  echo ">> Revise los ejemplos: "
-  echo "   REQ #123: mensaje del commit"
-  exit 1
-fi
+check_message() {
+    INPUT_FILE=$1
+	START_LINE=`head -n1 $INPUT_FILE`
+
+	if ! check_pattern "$START_LINE"; then
+	  echo -e "\e[1;31m############################\e[0m"
+	  echo -e "\e[1;31mERROR EN MENSAJE DE COMMIT\e[0m"
+	  echo -e "\e[1;31m############################\e[0m"
+	  echo ">> El mensaje del commit no cumple con el estándar del Banco del Austro."
+	  echo ">> Revise los ejemplos: "
+	  echo "   REQ #123: mensaje del commit"
+	  exit 1
+	fi
+}
+
+
+check_pattern() {
+	PATTERN="^(REQ) #[[:digit:]]+: "
+	[ "$1" =~ $PATTERN ] || return 1
+}
+
+
+check_message "$1"
