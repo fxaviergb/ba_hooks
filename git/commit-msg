@@ -3,6 +3,8 @@
 check_message() {
     INPUT_FILE=$1
 	START_LINE=`head -n1 $INPUT_FILE`
+
+	# Patrón con el que debe cumplir el mensaje del commit
 	PATTERN="^(REQ) #[[:digit:]]+: "
 
 	if ! [[ "$START_LINE" =~ $PATTERN ]]; then
