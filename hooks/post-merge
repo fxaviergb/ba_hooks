@@ -20,7 +20,7 @@ is_supported_origin() {
 }
 
 do_update() {
-	sh ../instalar.sh
+	sh "$HOME/.baustro/instalar.sh"
 }
 
 

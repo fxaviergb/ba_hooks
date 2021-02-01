@@ -7,14 +7,15 @@ CLONE_URL="https://github.com/fxaviergb/baustro_hooks.git"
 INSTALL_DIR_ROOT="$HOME/.baustro"
 INSTALL_DIR_HOOKS="${INSTALL_DIR_ROOT}/hooks"
 
-# Eliminar instalación previa si existe
+# Crear o actualizar el repositorio de instalación
 if [ -d "${INSTALL_DIR_ROOT}" ]
 then
-	rm -rf "${INSTALL_DIR_ROOT}"
+	cd "${INSTALL_DIR_ROOT}"
+	git pull
+else
+	git clone "$CLONE_URL" "$INSTALL_DIR_ROOT"
 fi
 
-# Clonar el repositorio en la ruta de intalación
-git clone "$CLONE_URL" "$INSTALL_DIR_ROOT"
 
 # Configurar la variable global de hooks
 git config --global core.hooksPath "${INSTALL_DIR_HOOKS}"
