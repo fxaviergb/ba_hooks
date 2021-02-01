@@ -1,6 +1,5 @@
 #!/bin/sh
 
-##
 
 # Nombre y URL del repositorio de hooks
 CLONE_URL="https://github.com/fxaviergb/baustro_hooks.git"
