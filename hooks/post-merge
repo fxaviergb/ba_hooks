@@ -1,4 +1,4 @@
 #!/bin/bash
 
 INSTALL_DIR_ROOT="$HOME/.baustro"
-".${INSTALL_DIR_ROOT}/actualizar.sh"
+exec "${INSTALL_DIR_ROOT}/actualizar.sh"
