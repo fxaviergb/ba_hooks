@@ -48,7 +48,7 @@ do_update() {
 execute() {
 	if is_supported_origin
 	then
-		if is_up_to_date_with_origin
+		if ! is_up_to_date_with_origin
 		then
 			echo "Actualizando estándares del Banco del Austro..."
 			do_update
