@@ -25,7 +25,7 @@ is_supported_origin() {
 
 
 do_update() {
-	sh "{INSTALL_DIR_ROOT}/instalar.sh"
+	sh "${INSTALL_DIR_ROOT}/instalar.sh"
 }
 
 
