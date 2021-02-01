@@ -20,8 +20,7 @@ is_supported_origin() {
 }
 
 do_update() {
-	# sh ../instalar.sh
-	sh /home/ue0100064z/scripts/baustro_hooks/instalar.sh
+	sh ../instalar.sh
 }
 
 

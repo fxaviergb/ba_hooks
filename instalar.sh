@@ -1,11 +1,10 @@
 #!/bin/sh
 
 # Nombre y URL del repositorio de hooks
-REPO_NAME="baustro"
-CLONE_URL="https://github.com/fxaviergb/${REPO_NAME}.git"
+CLONE_URL="https://github.com/fxaviergb/baustro_hooks.git"
 
 # Definir rutas de instalación
-INSTALL_DIR_ROOT="$HOME/.${REPO_NAME}"
+INSTALL_DIR_ROOT="$HOME/.baustro"
 INSTALL_DIR_HOOKS="${INSTALL_DIR_ROOT}/hooks"
 
 # Eliminar instalación previa si existe
