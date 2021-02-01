@@ -8,6 +8,7 @@ declare -a SUPPORTED_ORIGINS=("10.1.140.41")
 
 
 INSTALL_DIR_ROOT="$HOME/.baustro"
+CLONE_URL="https://github.com/fxaviergb/baustro_hooks.git"
 
 
 is_supported_origin() {
@@ -24,8 +25,7 @@ is_supported_origin() {
 
 
 is_up_to_date_with_origin() {
-	origin=$(git config --get remote.origin.url)
-	sha_origin=`git ls-remote "$origin" | head -1 | cut -d '	' -f1`
+	sha_origin=`git ls-remote "$CLONE_URL" | head -1 | cut -d '	' -f1`
 	sha_local=`git log | head -1 | cut -d ' ' -f2`
 	if [ "$sha_origin" = "$sha_local" ]
 	then
