@@ -11,7 +11,8 @@ Una vez clonado el repositorio, ejecutar "sh .baustro/instalar.sh".
 
 
 ** NOTAS **
-verificar la URL del repositorio origen en el archivo "instalar.sh"
+- Debe existir un repositorio "baustro_hooks" dedicado a hooks en el sistema de versionamiento.
+- verificar la URL del repositorio origen en el archivo "instalar.sh"
 
 
 ** TODO **
