@@ -11,6 +11,7 @@ INSTALL_DIR_HOOKS="${INSTALL_DIR_ROOT}/hooks"
 if [ -d "${INSTALL_DIR_ROOT}" ]
 then
 	cd "${INSTALL_DIR_ROOT}"
+	git reset origin/master --hard
 	git pull
 else
 	git clone "$CLONE_URL" "$INSTALL_DIR_ROOT"

@@ -7,6 +7,9 @@
 declare -a SUPPORTED_ORIGINS=("10.1.140.41")
 
 
+INSTALL_DIR_ROOT="$HOME/.baustro"
+
+
 is_supported_origin() {
 	ORIGIN=$(git config --get remote.origin.url)
 	for supported in "${SUPPORTED_ORIGINS[@]}"
@@ -19,8 +22,9 @@ is_supported_origin() {
 	return 1 #false in bash
 }
 
+
 do_update() {
-	sh "$HOME/.baustro/instalar.sh"
+	sh "${INSTALL_DIR_ROOT}/instalar.sh"
 }
 
 
