@@ -39,7 +39,7 @@ check_message() {
 
 print_message() {
 	echo -e "\e[1;31m##########################\e[0m"
-	echo -e "\e[1;31mERROR EN MENSAJE DE COMMIT\e[0m"
+	echo -e "\e[1;31mERROR EN MENSAJE DE COMMITTTTTTTTTTTT\e[0m"
 	echo -e "\e[1;31m##########################\e[0m"
 	echo ">> El mensaje del commit no cumple con el estándar del Banco del Austro."
 	echo ">> Revise los ejemplos: "
