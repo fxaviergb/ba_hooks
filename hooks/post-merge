@@ -23,6 +23,18 @@ is_supported_origin() {
 }
 
 
+is_up_to_date_with_origin() {
+	sha_origin=`git ls-remote origin master | cut -d '	' -f1`
+	sha_local=`git log | head -1 | cut -d ' ' -f2`
+	if [ "$sha_origin" = "$sha_local" ]
+	then
+		return 0
+	else
+		return 1
+	fi
+}
+
+
 do_update() {
 	sh "${INSTALL_DIR_ROOT}/instalar.sh"
 }
@@ -31,8 +43,11 @@ do_update() {
 execute() {
 	if is_supported_origin
 	then
-		echo "Actualizando estándares del Banco del Austro..."
-		do_update
+		if is_up_to_date_with_origin
+		then
+			echo "Actualizando estándares del Banco del Austro..."
+			do_update
+		fi
 	fi
 }
 
