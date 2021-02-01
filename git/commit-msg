@@ -1,43 +1,76 @@
 #!/bin/bash
 
+
+# ORIGENES SOPORTADOS
+# Se admiten solamente repositorios de Rhodecode 
+# (en lugar de la IP se podrían usar los nombres de los repositorios o un patrón que combine ambos)
+declare -a SUPPORTED_ORIGINS=("10.1.140.41")
+
+
+# PATRONES SOPORTADOS
+# Patrón con el que debe cumplir el mensaje del commit
+declare -a PATTERNS=(
+	"^(REQ) #[[:digit:]]+ " 
+	"^(REQ) [[:digit:]]+ "
+	"^(REQUERIMIENTO) #[[:digit:]]+ " 
+	"^(REQUERIMIENTO) [[:digit:]]+ "
+)
+
+
 check_message() {
-    INPUT_FILE=$1
+	INPUT_FILE=$1
 	START_LINE=`head -n1 $INPUT_FILE`
-
-	# Patrón con el que debe cumplir el mensaje del commit
-	PATTERN="^(REQ) #[[:digit:]]+: "
-
-	if ! [[ "$START_LINE" =~ $PATTERN ]]; then
-	  print_message
-	  exit 1
+	satisfies=false 
+	for pattern in "${PATTERNS[@]}"
+	do
+		if [[ $START_LINE =~ $pattern ]]
+		then
+		  satisfies=true
+		  break
+		fi
+	done
+	if [[ $satisfies = false ]]
+	then
+		print_message
+		exit 1
 	fi
 }
 
 
 print_message() {
-	echo -e "\e[1;31m############################\e[0m"
-	echo -e "\e[1;31mERROR EN MENSAJE DE COMMIT\e[0m"
-	echo -e "\e[1;31m############################\e[0m"
+	echo -e "\e[1;31m##########################\e[0m"
+	echo -e "\e[1;31mERROR EN MENSAJE DE COMMITTTT\e[0m"
+	echo -e "\e[1;31m##########################\e[0m"
 	echo ">> El mensaje del commit no cumple con el estándar del Banco del Austro."
 	echo ">> Revise los ejemplos: "
-	echo "   REQ #123: mensaje del commit"
+	echo "   REQ #123 mensaje del commit"
+	echo "   REQ 123 mensaje del commit"
+	echo "   REQUERIMIENTO #123 mensaje del commit"
+	echo "   REQUERIMIENTO 123 mensaje del commit"
 }
 
 
 is_supported_origin() {
-	# Se admiten solamente repositorios de Rhodecode (en lugar de la IP hay que usar los nombres de los repositorios)
-	SUPPORTED_ORIGIN="10.1.140.41"
 	ORIGIN=$(git config --get remote.origin.url)
-	if [[ $ORIGIN == *"$SUPPORTED_ORIGIN"* ]]
+	for supported in "${SUPPORTED_ORIGINS[@]}"
+	do
+		if [[ $ORIGIN == *"$supported"* ]]
+		then
+			return 0 #true in bash
+		fi
+	done
+	return 1 # false in bash
+}
+
+
+execute() {
+	if is_supported_origin
 	then
-		return 0
-	else
-		return 1
+		check_message "$1"
 	fi
 }
 
 
-if is_supported_origin
-then
-	check_message "$1"
-fi
+# FUNCION PRINCIPAL
+message="$1"
+execute "$message"
