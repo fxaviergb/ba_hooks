@@ -41,7 +41,8 @@ is_up_to_date_with_origin() {
 do_update() {
 	#sh "${INSTALL_DIR_ROOT}/instalar.sh"
 	cd ..
-	sh instalar.sh
+	DIR_ROOT=`pwd`
+	sh "${DIR_ROOT}/instalar.sh"
 }
 
 
