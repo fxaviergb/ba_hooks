@@ -7,8 +7,8 @@
 declare -a SUPPORTED_ORIGINS=("10.1.140.41")
 
 
+# RUTA DE INSTALACIÓN
 INSTALL_DIR_ROOT="$HOME/.baustro"
-CLONE_URL="https://github.com/fxaviergb/baustro_hooks.git"
 
 
 is_supported_origin() {
@@ -24,23 +24,6 @@ is_supported_origin() {
 }
 
 
-is_up_to_date_with_origin() {
-	# Commit ID of origin
-	sha_origin=`git ls-remote "$CLONE_URL" | head -1 | cut -d '	' -f1`
-	
-	# Commit ID of local
-	cd "${INSTALL_DIR_ROOT}"
-	sha_local=`git log | head -1 | cut -d ' ' -f2`
-	
-	if [ "$sha_origin" = "$sha_local" ]
-	then
-		return 0
-	else
-		return 1
-	fi
-}
-
-
 do_update() {
 	sh "${INSTALL_DIR_ROOT}/instalar.sh"
 }
@@ -49,11 +32,7 @@ do_update() {
 execute() {
 	if is_supported_origin
 	then
-		if ! is_up_to_date_with_origin
-		then
-			echo "Actualizando estándares del Banco del Austro..."
-			do_update
-		fi
+		do_update
 	fi
 }
 
