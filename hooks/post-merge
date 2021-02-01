@@ -7,13 +7,6 @@
 declare -a SUPPORTED_ORIGINS=("10.1.140.41")
 
 
-CLONE_DIR_ROOT="$HOME/.baustro"
-CLONE_DIR_FULL="${CLONE_DIR_ROOT}/hooks"
-
-# URL con la dirección del repositorio de hooks
-CLONE_URL="https://github.com/fxaviergb/ba_hooks.git"
-
-
 is_supported_origin() {
 	ORIGIN=$(git config --get remote.origin.url)
 	for supported in "${SUPPORTED_ORIGINS[@]}"
@@ -27,10 +20,7 @@ is_supported_origin() {
 }
 
 do_update() {
-	# TODO comprobar que la carpeta exista
-	cd "$CLONE_DIR_FULL"
-	git pull "$CLONE_URL"
-	git config --global core.hooksPath "${CLONE_DIR_FULL}/git"
+	sh ../instalar.sh
 }
 
 
