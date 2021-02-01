@@ -24,7 +24,8 @@ is_supported_origin() {
 
 
 is_up_to_date_with_origin() {
-	sha_origin=`git ls-remote origin master | cut -d '	' -f1`
+	origin=$(git config --get remote.origin.url)
+	sha_origin=`git ls-remote "$origin" | head -1 | cut -d '	' -f1`
 	sha_local=`git log | head -1 | cut -d ' ' -f2`
 	if [ "$sha_origin" = "$sha_local" ]
 	then
@@ -36,7 +37,9 @@ is_up_to_date_with_origin() {
 
 
 do_update() {
-	sh "${INSTALL_DIR_ROOT}/instalar.sh"
+	#sh "${INSTALL_DIR_ROOT}/instalar.sh"
+	cd ..
+	sh instalar.sh
 }
 
 
