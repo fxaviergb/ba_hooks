@@ -27,6 +27,8 @@ is_supported_origin() {
 is_up_to_date_with_origin() {
 	sha_origin=`git ls-remote "$CLONE_URL" | head -1 | cut -d '	' -f1`
 	sha_local=`git log | head -1 | cut -d ' ' -f2`
+	echo "$sha_origin"
+	echo "$sha_local"
 	if [ "$sha_origin" = "$sha_local" ]
 	then
 		return 0
@@ -50,6 +52,8 @@ execute() {
 		then
 			echo "Actualizando estándares del Banco del Austro..."
 			do_update
+		else
+			echo "NO"
 		fi
 	fi
 }
