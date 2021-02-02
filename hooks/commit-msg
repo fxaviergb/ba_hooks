@@ -1,10 +1,14 @@
 #!/bin/bash
 
 
+# RUTA DE INSTALACIÓN
+INSTALL_DIR_ROOT="$HOME/.baustro"
+
+
 # ORIGENES SOPORTADOS
 # Se admiten solamente repositorios de Rhodecode 
 # (en lugar de la IP se podrían usar los nombres de los repositorios o un patrón que combine ambos)
-declare -a SUPPORTED_ORIGINS=("10.1.140.41")
+BLACK_LIST_FILE="${INSTALL_DIR_ROOT}/lista-negra.txt"
 
 
 # PATRONES SOPORTADOS
@@ -51,15 +55,31 @@ print_message() {
 
 
 is_supported_origin() {
-	ORIGIN=$(git config --get remote.origin.url)
-	for supported in "${SUPPORTED_ORIGINS[@]}"
-	do
-		if [[ $ORIGIN == *"$supported"* ]]
-		then
-			return 0 #true in bash
-		fi
-	done
-	return 1 # false in bash
+	OLDIFS=$IFS
+	INPUT="${BLACK_LIST_FILE}"
+	exist=false
+
+	if [ -f $INPUT ]
+	then
+		IFS=$'\r\n' GLOBIGNORE='*' command eval  'lista_negra=($(cat $INPUT))'
+		ORIGIN=$(git config --get remote.origin.url)
+		for line in "${lista_negra[@]}"
+		do
+			if [[ $ORIGIN == *"$line"* ]]
+			then
+				exist=true
+				break
+			fi
+		done
+		IFS=$OLDIFS
+	fi
+
+	if [[ $exist = true ]]
+	then
+		return 0	# true in bash
+	else
+		return 1 	# false in bash
+	fi
 }
 
 
