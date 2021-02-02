@@ -2,13 +2,12 @@
 
 
 # RUTA DE INSTALACIÓN
-INSTALL_DIR_ROOT="$HOME/.baustro"
+INSTALL_DIR_ROOT=$(git config --global baustro.installDirRoot)
 
 
 # ORIGENES SOPORTADOS
-# Repositorios que deben apegarse al estándar
-# (en lugar de la IP usar los nombres de los repositorios o un patrón que combine ambos)
-BLACK_LIST_FILE="${INSTALL_DIR_ROOT}/lista-negra.txt"
+# Archivo con la lista de repositorios que deben apegarse al estándar
+BLACK_LIST_FILE=$(git config --global baustro.blackListFile)
 
 
 is_supported_origin() {

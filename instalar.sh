@@ -45,8 +45,11 @@ do_install() {
 }
 
 
-set_hooks_path() {
+set_git_configs() {
 	git config --global core.hooksPath "${INSTALL_DIR_HOOKS}"
+	git config --global baustro.installDirRoot "${INSTALL_DIR_ROOT}"
+	git config --global baustro.installDirHooks "${INSTALL_DIR_HOOKS}"
+	git config --global baustro.blackListFile "${BLACK_LIST_FILE}"
 }
 
 
@@ -58,8 +61,8 @@ execute() {
 	else
 		do_install
 	fi
-	# Configurar la variable global de hooks
-	set_hooks_path
+	# Configurar las variables global de git
+	set_git_configs
 }
 
 

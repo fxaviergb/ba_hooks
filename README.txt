@@ -12,12 +12,11 @@ Una vez clonado el repositorio, ejecutar "sh .baustro/instalar.sh".
 
 
 ** NOTAS **
-- Debe existir un repositorio "baustro_hooks" dedicado a hooks en el sistema de versionamiento.
+- Debe existir un repositorio "baustro_hooks" en el sistema de versionamiento.
 - verificar la URL del repositorio origen en el archivo "instalar.sh"
-- Cargar en "lista-negra.txt" los repositorios que deben apegarse al estándar en los mensajes del commit.
+- Cargar en "lista-negra.txt" los repositorios que deben apegarse al estándar de mensajes del commit.
 
 
 ** TODO **
-- Las variables globales "INSTALL_DIR_ROOT", "INSTALL_DIR_HOOKS", "CLONE_URL", "BLACK_LIST_FILE" podrían formar parte del "git config --global -e" para no tener que settearlas en diferentes scripts. El comando "sh .baustro/instalar.sh" podría settear estas variables durante la instalación.
 - El proceso de actualización de repositorio de hooks puede manejarse en un archivo separado (por ejemplo .baustro/hooks/actualizar.sh) el cual sea llamado por los hooks destinados a ejecutar la actualización. De esa manera, si se desea que la actualización se haga antes de un commit, en lugar de copiar el código de post-merge a pre-commit se podría simplemente en pre-commit llamar al script de actualización. Esto evitaría duplicidad de código.
 - Pendiente el proceso de ejecución automática del script para que sea transparente al desarrollador.
