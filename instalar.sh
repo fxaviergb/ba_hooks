@@ -9,6 +9,9 @@ CLONE_URL="https://github.com/fxaviergb/baustro_hooks.git"
 INSTALL_DIR_ROOT="$HOME/.baustro"
 INSTALL_DIR_HOOKS="${INSTALL_DIR_ROOT}/hooks"
 
+# Archivo de lista negra
+BLACK_LIST_FILE="${INSTALL_DIR_ROOT}/lista-negra.txt"
+
 
 is_up_to_date_with_origin() {
 	# Commit ID de origin
